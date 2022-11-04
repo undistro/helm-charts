@@ -1,0 +1,7 @@
+- name: Run chart-releaser
+  uses: helm/chart-releaser-action@v1.4.1
+  with:
+    charts_dir: charts
+    charts_repo_url: charts.undistro.io
+  env:
+    CR_TOKEN: "${{ secrets.GHA_TOKEN }}"
