@@ -1,8 +1,8 @@
 name: Release Helm Charts
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   release:
