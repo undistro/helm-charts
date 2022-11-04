@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  demo-chart-test:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-04T22:12:26.900408557Z"
+    description: A Helm chart for Kubernetes
+    digest: 8e805fe90bfbc2280a3b0182f34dec39e5346f9527c3ed35667ef0f58d70387b
+    name: demo-chart-test
+    type: application
+    urls:
+    - https://github.com/undistro/charts.undistro.io/releases/download/demo-chart-test-0.1.2/demo-chart-test-0.1.2.tgz
+    version: 0.1.2
+generated: "2022-11-04T22:12:26.900417857Z"
