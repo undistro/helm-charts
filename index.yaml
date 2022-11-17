@@ -11,4 +11,18 @@ entries:
     urls:
     - https://github.com/undistro/charts.undistro.io/releases/download/demo-chart-test-0.1.2/demo-chart-test-0.1.2.tgz
     version: 0.1.2
-generated: "2022-11-04T22:12:26.900417857Z"
+  zora:
+  - apiVersion: v2
+    appVersion: v0.3.9
+    created: "2022-11-17T19:36:42.024735127Z"
+    description: Zora scans multiple Kubernetes clusters and reports potential issues.
+    digest: 94516e9dd76ff6d391b287eb0c1c948a677337f64788262d4afa44b382242ab1
+    icon: https://zora.undistro.io/assets/logo.png
+    name: zora
+    sources:
+    - https://github.com/undistro/zora
+    type: application
+    urls:
+    - https://github.com/undistro/charts.undistro.io/releases/download/zora-0.3.9/zora-0.3.9.tgz
+    version: 0.3.9
+generated: "2022-11-17T19:36:42.024745427Z"
