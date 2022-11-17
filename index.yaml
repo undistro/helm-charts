@@ -3,6 +3,16 @@ entries:
   demo-chart-test:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-11-17T20:29:50.474342818Z"
+    description: A Helm chart for Kubernetes
+    digest: 6619975f85201d89fb559bed911649cdc9c0d6dba29de08d8601e98bcd64adfd
+    name: demo-chart-test
+    type: application
+    urls:
+    - https://github.com/undistro/charts.undistro.io/releases/download/demo-chart-test-0.1.3/demo-chart-test-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-11-04T22:12:26.900408557Z"
     description: A Helm chart for Kubernetes
     digest: 8e805fe90bfbc2280a3b0182f34dec39e5346f9527c3ed35667ef0f58d70387b
@@ -25,4 +35,4 @@ entries:
     urls:
     - https://github.com/undistro/charts.undistro.io/releases/download/zora-0.3.9/zora-0.3.9.tgz
     version: 0.3.9
-generated: "2022-11-17T19:36:42.024745427Z"
+generated: "2022-11-17T20:29:50.474351518Z"
