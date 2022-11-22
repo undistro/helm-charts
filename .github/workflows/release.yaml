@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+env:
+  REGISTRY: ghcr.io
+  PACKAGES_PATH: .cr-release-packages
+
 jobs:
   release:
     # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
     # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     permissions:
       contents: write
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,3 +40,22 @@ jobs:
         with:
           charts_dir: charts
           charts_repo_url: charts.undistro.io
+
+      - name: List packages
+        id: ls
+        continue-on-error: true
+        working-directory: ${{ env.PACKAGES_PATH }}
+        run: ls *.tgz
+
+      - name: Log in to the OCI registry
+        if: steps.ls.outcome == 'success'
+        run: echo ${{ secrets.GITHUB_TOKEN }} | helm registry login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+
+      - name: Upload chart to the OCI registry
+        working-directory: ${{ env.PACKAGES_PATH }}
+        if: steps.ls.outcome == 'success'
+        run: |
+          for f in *tgz
+          do
+            helm push $f oci://${{ env.REGISTRY }}/${{ github.repository }}/charts
+          done
