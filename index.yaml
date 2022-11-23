@@ -23,6 +23,19 @@ entries:
     version: 0.1.2
   zora:
   - apiVersion: v2
+    appVersion: v0.3.10
+    created: "2022-11-23T12:44:33.569575454Z"
+    description: Zora scans multiple Kubernetes clusters and reports potential issues.
+    digest: b1bca77a6c08f14d6216910264c21f021a7c0ae281799b7c5c3ebfed5eefc0b7
+    icon: https://zora.undistro.io/assets/logo.png
+    name: zora
+    sources:
+    - https://github.com/undistro/zora
+    type: application
+    urls:
+    - https://github.com/undistro/charts.undistro.io/releases/download/zora-0.3.10/zora-0.3.10.tgz
+    version: 0.3.10
+  - apiVersion: v2
     appVersion: v0.3.9
     created: "2022-11-17T19:36:42.024735127Z"
     description: Zora scans multiple Kubernetes clusters and reports potential issues.
@@ -35,4 +48,4 @@ entries:
     urls:
     - https://github.com/undistro/charts.undistro.io/releases/download/zora-0.3.9/zora-0.3.9.tgz
     version: 0.3.9
-generated: "2022-11-17T20:29:50.474351518Z"
+generated: "2022-11-23T12:44:33.569591254Z"
