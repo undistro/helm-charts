@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/undsitro/zora-saas
+  repository: ghcr.io/undistro/zora-saas
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -97,7 +97,7 @@ ui:
   enabled: true
   replicaCount: 1
   image:
-    repository: ghcr.io/undsitro/zora-ui-saas
+    repository: ghcr.io/undistro/zora-ui-saas
     pullPolicy: IfNotPresent
     tag: ""
   # This secret must contains GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_ID, GITHUB_SECRET and NEXTAUTH_SECRET
