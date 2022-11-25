@@ -36,6 +36,23 @@ service:
   type: ClusterIP
   port: 80
 
+proxy:
+  enabled: true
+  version: v0.13.1
+  type: ClusterIP
+  port: 8443
+  log:
+    level: 10
+    toStderr: true
+  endpoints:
+    - "/zora/api/v1/me"
+    - "/zora/api/v1/users"
+    - "/zora/api/v1/helmreleases"
+    - "/zora/api/v1/clusters"
+    - "/zora/api/v1/namespaces/*"
+    - "/zora/api/v1/issues"
+  verbs: ["get", "update"]
+
 ingress:
   enabled: false
   className: ""
@@ -44,7 +61,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   host: zora-saas.domain
   server:
-    path: /api/v1alpha1
+    path: /zora/api/v1alpha1
     pathType: ImplementationSpecific
   ui:
     path: /
@@ -77,6 +94,7 @@ log:
   encoding: "json"
 
 ui:
+  enabled: true
   replicaCount: 1
   image:
     repository: ghcr.io/undsitro/zora-ui-saas
@@ -84,10 +102,6 @@ ui:
     tag: ""
   # This secret must contains GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_ID, GITHUB_SECRET and NEXTAUTH_SECRET
   secretName: "zora-saas-ui-credentials"
-  serviceAccount:
-    create: true
-    annotations: {}
-    name: ""
   podAnnotations: {}
   podSecurityContext:
     fsGroup: 2000

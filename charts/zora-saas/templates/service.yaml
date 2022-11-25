@@ -13,3 +13,21 @@ spec:
       name: http
   selector:
     {{- include "zora-saas.selectorLabels" . | nindent 4 }}
+---
+{{- if .Values.proxy.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: saas-proxy
+  labels:
+    {{- include "zora-saas.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.proxy.type }}
+  ports:
+    - name: https
+      protocol: TCP
+      port: {{ .Values.proxy.port }}
+      targetPort: https
+  selector:
+    {{- include "zora-saas.selectorLabels" . | nindent 4 }}
+{{- end }}

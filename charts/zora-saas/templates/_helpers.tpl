@@ -70,15 +70,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-
-{{/*
-Create the name of the service account to use in UI
-*/}}
-{{- define "zora-saas.uiServiceAccountName" -}}
-{{- if .Values.ui.serviceAccount.create }}
-{{- default (printf "%s-%s" (include "zora-saas.fullname" .) "ui") .Values.ui.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.ui.serviceAccount.name }}
-{{- end }}
-{{- end }}
