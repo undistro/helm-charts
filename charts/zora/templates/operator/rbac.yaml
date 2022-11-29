@@ -1,13 +1,27 @@
-{{- if .Values.operator.rbac.serviceAccount.create -}}
+# Copyright 2022 Undistro Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+{{ if .Values.operator.rbac.serviceAccount.create -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ include "zora.operatorServiceAccountName" . }}
   labels:
-    {{- include "zora.operatorLabels" . | nindent 4 }}
+  {{- include "zora.operatorLabels" . | nindent 4 }}
   {{- with .Values.operator.rbac.serviceAccount.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+  {{- toYaml . | nindent 4 }}
   {{- end }}
 {{ end }}
 {{- if .Values.operator.rbac.create -}}
@@ -17,37 +31,37 @@ kind: Role
 metadata:
   name: {{ include "zora.operatorServiceAccountName" . }}-leader-election
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - configmaps
-    verbs:
-      - get
-      - list
-      - watch
-      - create
-      - update
-      - patch
-      - delete
-  - apiGroups:
-      - coordination.k8s.io
-    resources:
-      - leases
-    verbs:
-      - get
-      - list
-      - watch
-      - create
-      - update
-      - patch
-      - delete
-  - apiGroups:
-      - ""
-    resources:
-      - events
-    verbs:
-      - create
-      - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -136,23 +150,23 @@ rules:
   verbs:
   - get
 - apiGroups:
-    - zora.undistro.io
+  - zora.undistro.io
   resources:
-    - clusterissues
+  - clusterissues
   verbs:
-    - create
-    - delete
-    - get
-    - list
-    - patch
-    - update
-    - watch
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
-    - zora.undistro.io
+  - zora.undistro.io
   resources:
-    - clusterissues/status
+  - clusterissues/status
   verbs:
-    - get
+  - get
 - apiGroups:
   - zora.undistro.io
   resources:
@@ -219,28 +233,28 @@ kind: ClusterRole
 metadata:
   name: {{ include "zora.operatorServiceAccountName" . }}-metrics-reader
 rules:
-  - nonResourceURLs:
-      - /metrics
-    verbs:
-      - get
+- nonResourceURLs:
+  - "/metrics"
+  verbs:
+  - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ include "zora.operatorServiceAccountName" . }}-proxy
 rules:
-  - apiGroups:
-      - authentication.k8s.io
-    resources:
-      - tokenreviews
-    verbs:
-      - create
-  - apiGroups:
-      - authorization.k8s.io
-    resources:
-      - subjectaccessreviews
-    verbs:
-      - create
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -251,9 +265,9 @@ roleRef:
   kind: Role
   name: {{ include "zora.operatorServiceAccountName" . }}-leader-election
 subjects:
-  - kind: ServiceAccount
-    name: {{ include "zora.operatorServiceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: {{ include "zora.operatorServiceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -264,9 +278,9 @@ roleRef:
   kind: ClusterRole
   name: {{ include "zora.operatorServiceAccountName" . }}
 subjects:
-  - kind: ServiceAccount
-    name: {{ include "zora.operatorServiceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: {{ include "zora.operatorServiceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -277,7 +291,8 @@ roleRef:
   kind: ClusterRole
   name: {{ include "zora.operatorServiceAccountName" . }}-proxy
 subjects:
-  - kind: ServiceAccount
-    name: {{ include "zora.operatorServiceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: {{ include "zora.operatorServiceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
 {{- end }}
+---
