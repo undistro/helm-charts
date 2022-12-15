@@ -35,6 +35,12 @@ spec:
           args:
             - --log-level={{ .Values.log.level }}
             - --log-encoding={{ .Values.log.encoding }}
+            - --storage={{ .Values.storage }}
+            - --database={{ .Values.mongo.database }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.mongo.secret }}
+                optional: {{ if eq .Values.storage "mongo" }}false{{ else }}true{{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

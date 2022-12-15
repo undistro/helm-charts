@@ -124,3 +124,11 @@ ui:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+
+# 'mongo' or 'in_memory'
+storage: "in_memory"
+
+mongo:
+  # This secret must contains MONGODB_URI data
+  secret: mongodb-connection
+  database: "test"
