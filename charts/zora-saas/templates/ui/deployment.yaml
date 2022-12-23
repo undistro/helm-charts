@@ -49,7 +49,7 @@ spec:
             - name: SAAS_PROXY_TOKEN_PATH
               value: "/var/run/secrets/kubernetes.io/serviceaccount/token"
             {{- else }}
-              value: 'https://{{ include "zora-saas.fullname" . }}:{{ .Values.service.port }}/zora'
+              value: 'http://{{ include "zora-saas.fullname" . }}:{{ .Values.service.port }}/zora'
             {{- end }}
           ports:
             - name: http

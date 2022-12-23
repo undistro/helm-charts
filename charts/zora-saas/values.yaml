@@ -19,7 +19,8 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+podAnnotations:
+  kubectl.kubernetes.io/default-container: zora-saas-server
 
 podSecurityContext:
    fsGroup: 2000
@@ -38,7 +39,10 @@ service:
 
 proxy:
   enabled: true
-  version: v0.13.1
+  image:
+    repository: quay.io/brancz/kube-rbac-proxy
+    pullPolicy: IfNotPresent
+    tag: v0.13.1
   type: ClusterIP
   port: 8443
   log:
@@ -100,7 +104,10 @@ ui:
     repository: ghcr.io/undistro/zora-ui-saas
     pullPolicy: IfNotPresent
     tag: ""
-  # This secret must contains GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_ID, GITHUB_SECRET and NEXTAUTH_SECRET
+  # This secret must contains GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+  #   GITHUB_ID, GITHUB_SECRET,
+  #   AZURE_AD_CLIENT_ID, AZURE_AD_CLIENT_SECRET, AZURE_AD_TENANT_ID
+  #   and NEXTAUTH_SECRET
   secretName: "zora-saas-ui-credentials"
   podAnnotations: {}
   podSecurityContext:

@@ -17,3 +17,7 @@ imagePullSecrets:
 storage: "mongo"
 mongo:
   database: "zora-saas-hml"
+log:
+  level: debug
+proxy:
+  enabled: false

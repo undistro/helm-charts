@@ -28,7 +28,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: zora-saas-server
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -58,7 +58,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
         {{- if .Values.proxy.enabled }}
         - name: saas-proxy
-          image: "quay.io/brancz/kube-rbac-proxy:{{ .Values.proxy.version }}"
+          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
+          imagePullPolicy: {{ .Values.proxy.image.pullPolicy }}
           args:
             - "--secure-listen-address=0.0.0.0:{{ .Values.proxy.port }}"
             - "--upstream=http://127.0.0.1:3003"
@@ -69,6 +70,7 @@ spec:
               name: https
           securityContext:
             allowPrivilegeEscalation: false
+            runAsUser: 65532
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
