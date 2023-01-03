@@ -1,6 +1,6 @@
 # Zora Helm Chart
 
-![Version: 0.4.0-alpha6](https://img.shields.io/badge/Version-0.4.0--alpha6-informational?style=flat-square&color=38C794) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=38C794) ![AppVersion: v0.4.0-alpha6](https://img.shields.io/badge/AppVersion-v0.4.0--alpha6-informational?style=flat-square&color=38C794)
+![Version: 0.4.0-alpha7](https://img.shields.io/badge/Version-0.4.0--alpha7-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.4.0-alpha7](https://img.shields.io/badge/AppVersion-v0.4.0--alpha7-informational?style=flat-square&color=3CA9DD)
 
 Zora scans multiple Kubernetes clusters and reports potential issues.
 
@@ -12,7 +12,7 @@ To install the chart with the release name `zora`:
 helm repo add undistro https://charts.undistro.io --force-update
 helm upgrade --install zora undistro/zora \
   -n zora-system \
-  --version 0.4.0-alpha6 \
+  --version 0.4.0-alpha7 \
   --create-namespace --wait
 ```
 
@@ -55,7 +55,7 @@ The following table lists the configurable parameters of the Zora chart and thei
 | nameOverride | string | `""` | String to partially override fullname template with a string (will prepend the release name) |
 | fullnameOverride | string | `""` | String to fully override fullname template with a string |
 | saas.workspaceID | string | `""` | Your SaaS workspace ID |
-| saas.server | string | `"https://saas-hml.undistro.io"` | SaaS server URL |
+| saas.server | string | `"https://zora-dashboard.undistro.io"` | SaaS server URL |
 | saas.hooks.image.repository | string | `"radial/busyboxplus"` | SaaS hooks image repository |
 | saas.hooks.image.tag | string | `"curl"` | SaaS hooks image tag |
 | saas.hooks.installURL | string | `"{{.Values.saas.server}}/zora/api/v1alpha1/workspaces/{{.Values.saas.workspaceID}}/helmreleases"` | SaaS install hook URL template |
