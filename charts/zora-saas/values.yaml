@@ -55,6 +55,8 @@ proxy:
     - "/zora/api/v1/clusters"
     - "/zora/api/v1/namespaces/*"
     - "/zora/api/v1/issues"
+    - "/zora/api/v1/workspaces"
+    - "/zora/api/v1/workspaces/*"
   verbs: ["get", "update"]
 
 ingress:
@@ -139,3 +141,5 @@ mongo:
   # This secret must contains MONGODB_URI data
   secret: mongodb-connection
   database: "test"
+
+scheduleValidation: false

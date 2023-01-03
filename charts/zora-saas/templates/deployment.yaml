@@ -37,6 +37,9 @@ spec:
             - --log-encoding={{ .Values.log.encoding }}
             - --storage={{ .Values.storage }}
             - --database={{ .Values.mongo.database }}
+            {{- if .Values.scheduleValidation }}
+            - --schedule-validation
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ .Values.mongo.secret }}
