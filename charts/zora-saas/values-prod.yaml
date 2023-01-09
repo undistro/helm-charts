@@ -1,9 +1,9 @@
 ui:
   image:
-    tag: b5af29f861ea039eed1484299e1f5888125d76a4
+    tag: saas-0.1.1
 ingress:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging-http01
+    cert-manager.io/cluster-issuer: letsencrypt-production-http01
   enabled: true
   className: nginx
   host: zora-dashboard.undistro.io
@@ -24,3 +24,5 @@ log:
   level: info
 proxy:
   enabled: false
+monitor:
+  enabled: true

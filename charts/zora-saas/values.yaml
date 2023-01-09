@@ -143,3 +143,8 @@ mongo:
   database: "test"
 
 scheduleValidation: false
+
+monitor:
+  enabled: false
+  path: /metrics
+  scrapeInterval: 30s

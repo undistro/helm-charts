@@ -1,0 +1,14 @@
+{{- if .Values.monitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "zora-saas.fullname" . }}
+spec:
+  endpoints:
+    - path: {{ .Values.monitor.path }}
+      port: http
+      interval: {{ .Values.monitor.scrapeInterval }}
+  selector:
+    matchLabels:
+      {{- include "zora-saas.selectorLabels" . | nindent 6 }}
+{{- end }}
