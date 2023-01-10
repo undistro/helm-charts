@@ -1,6 +1,19 @@
 ui:
   image:
     tag: saas-0.1.1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 100Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 20
+    targetCPUUtilizationPercentage: 60
+    targetMemoryUtilizationPercentage: 60
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production-http01
@@ -13,8 +26,8 @@ resources:
     cpu: 100m
     memory: 128Mi
   requests:
-    cpu: 4m
-    memory: 30Mi
+    cpu: 50m
+    memory: 100Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
 storage: "mongo"
@@ -26,3 +39,9 @@ proxy:
   enabled: false
 monitor:
   enabled: true
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 60
