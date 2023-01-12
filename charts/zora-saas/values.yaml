@@ -148,3 +148,6 @@ monitor:
   enabled: false
   path: /metrics
   scrapeInterval: 30s
+
+grafanaDashboard:
+  enabled: true
