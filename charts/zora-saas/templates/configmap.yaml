@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "zora-saas.fullname" . }}-dashboards
+  namespace: {{ .Values.grafanaDashboard.namespace }}
   labels:
     grafana_dashboard: "1"
     {{- include "zora-saas.labels" . | nindent 4 }}

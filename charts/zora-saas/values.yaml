@@ -150,4 +150,5 @@ monitor:
   scrapeInterval: 30s
 
 grafanaDashboard:
+  namespace: monitoring
   enabled: true
