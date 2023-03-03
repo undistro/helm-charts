@@ -1,6 +1,6 @@
 ui:
   image:
-    tag: saas-0.1.1
+    tag: saas-0.4.0
   resources:
     limits:
       cpu: 100m
