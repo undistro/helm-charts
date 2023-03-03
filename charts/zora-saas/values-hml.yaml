@@ -21,3 +21,5 @@ log:
   level: info
 proxy:
   enabled: false
+grafanaDashboard:
+  enabled: false
