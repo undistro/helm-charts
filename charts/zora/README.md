@@ -1,6 +1,6 @@
 # Zora Helm Chart
 
-![Version: 0.4.4](https://img.shields.io/badge/Version-0.4.4-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.4.4](https://img.shields.io/badge/AppVersion-v0.4.4-informational?style=flat-square&color=3CA9DD)
+![Version: 0.4.5-alpha1](https://img.shields.io/badge/Version-0.4.5--alpha1-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.4.5-alpha1](https://img.shields.io/badge/AppVersion-v0.4.5--alpha1-informational?style=flat-square&color=3CA9DD)
 
 Zora scans multiple Kubernetes clusters and reports potential issues.
 
@@ -12,7 +12,7 @@ To install the chart with the release name `zora`:
 helm repo add undistro https://charts.undistro.io --force-update
 helm upgrade --install zora undistro/zora \
   -n zora-system \
-  --version 0.4.4 \
+  --version 0.4.5-alpha1 \
   --create-namespace --wait
 ```
 
@@ -56,8 +56,8 @@ The following table lists the configurable parameters of the Zora chart and thei
 | fullnameOverride | string | `""` | String to fully override fullname template with a string |
 | saas.workspaceID | string | `""` | Your SaaS workspace ID |
 | saas.server | string | `"https://zora-dashboard.undistro.io"` | SaaS server URL |
-| saas.hooks.image.repository | string | `"radial/busyboxplus"` | SaaS hooks image repository |
-| saas.hooks.image.tag | string | `"curl"` | SaaS hooks image tag |
+| saas.hooks.image.repository | string | `"curlimages/curl"` | SaaS hooks image repository |
+| saas.hooks.image.tag | string | `"7.88.1"` | SaaS hooks image tag |
 | saas.hooks.installURL | string | `"{{.Values.saas.server}}/zora/api/v1alpha1/workspaces/{{.Values.saas.workspaceID}}/helmreleases"` | SaaS install hook URL template |
 | imageCredentials.create | bool | `false` | Specifies whether the secret should be created by providing credentials |
 | imageCredentials.registry | string | `"ghcr.io"` | Docker registry host |
@@ -96,11 +96,9 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.defaultPlugins | list | `["popeye"]` | Names of the default plugins |
 | scan.plugins.popeye.enabled | bool | `true` |  |
 | scan.plugins.popeye.skipInternalResources | bool | `false` | Specifies whether the following resources should be skipped by `popeye` scans. 1. resources from `kube-system`, `kube-public` and `kube-node-lease` namespaces; 2. kubernetes system reserved RBAC (prefixed with `system:`); 3. `kube-root-ca.crt` configmaps; 4. `default` namespace; 5. `default` serviceaccounts; 6. Helm secrets (prefixed with `sh.helm.release`); 7. Zora components. See `popeye` configuration file that is used for this case: https://github.com/undistro/zora/blob/main/charts/zora/templates/plugins/popeye-config.yaml |
+| scan.plugins.popeye.resources | object | `{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"250m","memory":"256Mi"}}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `popeye` container |
 | scan.plugins.popeye.image.repository | string | `"ghcr.io/undistro/popeye"` | popeye plugin image repository |
-| scan.plugins.popeye.image.tag | string | `"nonroot"` | popeye plugin image tag |
-| scan.plugins.kubescape.enabled | bool | `false` |  |
-| scan.plugins.kubescape.image.repository | string | `"quay.io/armosec/kubescape"` | kubescape plugin image repository |
-| scan.plugins.kubescape.image.tag | string | `"v2.0.163"` | kubescape plugin image tag |
+| scan.plugins.popeye.image.tag | string | `"v0.11.1-cross"` | popeye plugin image tag |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
