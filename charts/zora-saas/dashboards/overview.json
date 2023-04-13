@@ -93,7 +93,7 @@
           "root_selector": "total",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/totalusers",
+          "url": "http://zora-saas-admin.zora-saas/admin/totalusers",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -168,7 +168,7 @@
           "root_selector": "total",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/totalclusters",
+          "url": "http://zora-saas-admin.zora-saas/admin/totalclusters",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -375,6 +375,11 @@
               "type": "timestamp"
             },
             {
+              "selector": "lastAccess",
+              "text": "Last Access",
+              "type": "timestamp"
+            },
+            {
               "selector": "createdAt",
               "text": "Created At",
               "type": "timestamp"
@@ -397,7 +402,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/users",
+          "url": "http://zora-saas-admin.zora-saas/admin/users",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -544,7 +549,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/workspaces",
+          "url": "http://zora-saas-admin.zora-saas/admin/workspaces",
           "url_options": {
             "data": "",
             "method": "GET"

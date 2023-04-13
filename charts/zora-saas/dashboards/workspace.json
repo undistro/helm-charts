@@ -132,7 +132,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/workspaces/${workspace}",
+          "url": "http://zora-saas-admin.zora-saas/admin/workspaces/${workspace}",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -288,7 +288,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/workspaces/${workspace}/clusters",
+          "url": "http://zora-saas-admin.zora-saas/admin/workspaces/${workspace}/clusters",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -398,7 +398,7 @@
           "root_selector": "users",
           "source": "url",
           "type": "json",
-          "url": "http://zora-saas.zora-saas/admin/workspaces/${workspace}",
+          "url": "http://zora-saas-admin.zora-saas/admin/workspaces/${workspace}",
           "url_options": {
             "data": "",
             "method": "GET"
@@ -454,7 +454,7 @@
             "root_selector": "",
             "source": "url",
             "type": "json",
-            "url": "http://zora-saas.zora-saas/admin/workspaceids",
+            "url": "http://zora-saas-admin.zora-saas/admin/workspaceids",
             "url_options": {
               "data": "",
               "method": "GET"
