@@ -31,7 +31,7 @@ securityContext:
      - ALL
    readOnlyRootFilesystem: true
    runAsNonRoot: true
-   runAsUser: 1000
+   runAsUser: 65532
 
 service:
   type: ClusterIP
@@ -152,3 +152,34 @@ monitor:
 grafanaDashboard:
   namespace: monitoring
   enabled: true
+
+admin:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: ghcr.io/undistro/zora-saas-admin
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  podAnnotations: {}
+  podSecurityContext:
+    fsGroup: 2000
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 65532
+  service:
+    type: ClusterIP
+    port: 80
+  resources: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

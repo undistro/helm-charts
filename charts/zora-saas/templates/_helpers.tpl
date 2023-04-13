@@ -61,6 +61,15 @@ app.kubernetes.io/component: ui
 {{- end }}
 
 {{/*
+Admin Selector labels
+*/}}
+{{- define "zora-saas.adminSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "zora-saas.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/component: admin
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "zora-saas.serviceAccountName" -}}
