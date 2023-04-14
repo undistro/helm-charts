@@ -183,18 +183,11 @@
         "type": "yesoreyeram-infinity-datasource",
         "uid": "infinity"
       },
+      "description": "Total of workspaces with clusters",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "filterable": true,
-            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -215,8 +208,89 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 6,
         "x": 12,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "columns": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "infinity"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "total",
+          "source": "url",
+          "type": "json",
+          "url": "http://zora-saas-admin.zora-saas/admin/totalactiveworkspaces",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Active Workspaces",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
         "y": 0
       },
       "id": 9,
@@ -375,11 +449,6 @@
               "type": "timestamp"
             },
             {
-              "selector": "lastAccess",
-              "text": "Last Access",
-              "type": "timestamp"
-            },
-            {
               "selector": "createdAt",
               "text": "Created At",
               "type": "timestamp"
@@ -532,6 +601,11 @@
               "type": "number"
             },
             {
+              "selector": "totalClusters",
+              "text": "Total Clusters",
+              "type": "number"
+            },
+            {
               "selector": "clusterLimit",
               "text": "Cluster Limit",
               "type": "number"
@@ -564,7 +638,9 @@
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "zora"
+  ],
   "templating": {
     "list": []
   },
@@ -585,6 +661,6 @@
   "timezone": "",
   "title": "Zora / Overview",
   "uid": "8dhbi2L4z",
-  "version": 20,
+  "version": 1,
   "weekStart": ""
 }
