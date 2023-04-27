@@ -456,7 +456,7 @@
             "root_selector": "",
             "source": "url",
             "type": "json",
-            "url": "http://zora-saas-admin.zora-saas/admin/workspaceids",
+            "url": "http://zora-saas-admin.zora-saas/admin/workspace/ids",
             "url_options": {
               "data": "",
               "method": "GET"
