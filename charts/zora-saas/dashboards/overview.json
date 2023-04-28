@@ -197,7 +197,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Total Clusters"
+            "displayName": "Clusters"
           }
         ]
       },
@@ -279,7 +279,7 @@
       "type": "table"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -287,220 +287,346 @@
         "y": 15
       },
       "id": 15,
-      "panels": [
+      "panels": [],
+      "title": "Users",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "infinity"
+      },
+      "description": "Active = Users who logged in within the last 15 days",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "id": 6,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
         {
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "infinity"
-          },
-          "description": "Active = Users who logged in in the last 15 days",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "mappings": [],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 14,
-            "w": 6,
-            "x": 0,
-            "y": 16
-          },
-          "id": 6,
-          "options": {
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": true,
-            "showThresholdMarkers": true,
-            "text": {}
-          },
-          "pluginVersion": "9.4.7",
-          "targets": [
+          "columns": [
             {
-              "columns": [
-                {
-                  "selector": "active",
-                  "text": "Active",
-                  "type": "number"
-                },
-                {
-                  "selector": "total",
-                  "text": "Total",
-                  "type": "number"
-                }
-              ],
-              "datasource": {
-                "type": "yesoreyeram-infinity-datasource",
-                "uid": "infinity"
-              },
-              "filters": [],
-              "format": "table",
-              "global_query_id": "",
-              "parser": "backend",
-              "refId": "A",
-              "root_selector": "",
-              "source": "url",
-              "type": "json",
-              "url": "http://zora-saas-admin.zora-saas/admin/user/stats",
-              "url_options": {
-                "data": "",
-                "method": "GET"
-              }
+              "selector": "active",
+              "text": "Active",
+              "type": "number"
+            },
+            {
+              "selector": "total",
+              "text": "Total",
+              "type": "number"
             }
           ],
-          "title": "Users Stats",
-          "type": "gauge"
-        },
-        {
           "datasource": {
             "type": "yesoreyeram-infinity-datasource",
             "uid": "infinity"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": true,
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "http://zora-saas-admin.zora-saas/admin/user/stats",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Users Stats",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic",
+            "seriesBy": "last"
           },
-          "gridPos": {
-            "h": 14,
-            "w": 18,
-            "x": 6,
-            "y": 16
-          },
-          "id": 4,
-          "options": {
-            "footer": {
-              "countRows": false,
-              "enablePagination": true,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "showHeader": true,
-            "sortBy": [
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "desc": true,
-                "displayName": "Created At"
+                "color": "green",
+                "value": null
               }
             ]
           },
-          "pluginVersion": "9.4.7",
-          "targets": [
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 18,
+        "x": 6,
+        "y": 16
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "columns": [
             {
-              "columns": [
-                {
-                  "selector": "id",
-                  "text": "Email",
-                  "type": "string"
-                },
-                {
-                  "selector": "name",
-                  "text": "Name",
-                  "type": "string"
-                },
-                {
-                  "selector": "authProviders",
-                  "text": "Auth Providers",
-                  "type": "string"
-                },
-                {
-                  "selector": "company",
-                  "text": "Company",
-                  "type": "string"
-                },
-                {
-                  "selector": "jobTitle",
-                  "text": "Job Title",
-                  "type": "string"
-                },
-                {
-                  "selector": "lastLogin",
-                  "text": "Last Login",
-                  "type": "timestamp"
-                },
-                {
-                  "selector": "createdAt",
-                  "text": "Created At",
-                  "type": "timestamp"
-                },
-                {
-                  "selector": "updatedAt",
-                  "text": "Updated At",
-                  "type": "timestamp"
-                }
-              ],
-              "datasource": {
-                "type": "yesoreyeram-infinity-datasource",
-                "uid": "infinity"
-              },
-              "filters": [],
-              "format": "table",
-              "global_query_id": "",
-              "parser": "backend",
-              "refId": "A",
-              "root_selector": "",
-              "source": "url",
-              "type": "json",
-              "url": "http://zora-saas-admin.zora-saas/admin/users",
-              "url_options": {
-                "data": "",
-                "method": "GET"
-              }
+              "selector": "interval",
+              "text": "interval",
+              "type": "timestamp"
+            },
+            {
+              "selector": "count",
+              "text": "Created Users",
+              "type": "number"
             }
           ],
-          "title": "Users",
-          "type": "table"
+          "data": "[\n  {\"day\": \"2023-04-27T00:00:00Z\", \"newUsers\":  0},\n  {\"day\": \"2023-04-26T00:00:00Z\", \"newUsers\":  7},\n  {\"day\": \"2023-04-25T00:00:00Z\", \"newUsers\":  4},\n  {\"day\": \"2023-04-24T00:00:00Z\", \"newUsers\":  5},\n  {\"day\": \"2023-04-23T00:00:00Z\", \"newUsers\":  1},\n  {\"day\": \"2023-04-22T00:00:00Z\", \"newUsers\":  2},\n  {\"day\": \"2023-04-21T00:00:00Z\", \"newUsers\":  1},\n  {\"day\": \"2023-04-20T00:00:00Z\", \"newUsers\":  9},\n  {\"day\": \"2023-04-19T00:00:00Z\", \"newUsers\":  8}\n]\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "infinity"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "http://zora-saas-admin.zora-saas/admin/user/count",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "interval",
+                "value": "$__customInterval(30m,1m,6h,10m,2d,1h,24h)"
+              },
+              {
+                "key": "from",
+                "value": "${__from:date}"
+              },
+              {
+                "key": "to",
+                "value": "${__to:date}"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "New Users",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "infinity"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 4,
+      "options": {
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Created At"
+          }
+        ]
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "columns": [
+            {
+              "selector": "id",
+              "text": "Email",
+              "type": "string"
+            },
+            {
+              "selector": "name",
+              "text": "Name",
+              "type": "string"
+            },
+            {
+              "selector": "authProviders",
+              "text": "Auth Providers",
+              "type": "string"
+            },
+            {
+              "selector": "company",
+              "text": "Company",
+              "type": "string"
+            },
+            {
+              "selector": "jobTitle",
+              "text": "Job Title",
+              "type": "string"
+            },
+            {
+              "selector": "lastLogin",
+              "text": "Last Login",
+              "type": "timestamp"
+            },
+            {
+              "selector": "createdAt",
+              "text": "Created At",
+              "type": "timestamp"
+            },
+            {
+              "selector": "updatedAt",
+              "text": "Updated At",
+              "type": "timestamp"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "infinity"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "http://zora-saas-admin.zora-saas/admin/users",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
         }
       ],
       "title": "Users",
-      "type": "row"
+      "type": "table"
     },
     {
       "collapsed": true,
@@ -508,7 +634,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 44
       },
       "id": 13,
       "panels": [
@@ -651,7 +777,7 @@
               }
             }
           ],
-          "title": "Workspaces with Cluster(s)",
+          "title": "Workspaces with Cluster",
           "type": "stat"
         },
         {
@@ -754,6 +880,99 @@
           ],
           "title": "GitHub Releases",
           "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "infinity"
+          },
+          "description": "Panel to debug Grafana variables",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 10
+          },
+          "id": 24,
+          "options": {
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.4.7",
+          "targets": [
+            {
+              "columns": [],
+              "computed_columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "infinity"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "",
+              "parser": "backend",
+              "refId": "A",
+              "root_selector": "args",
+              "source": "url",
+              "type": "json",
+              "url": "https://httpbingo.org/get",
+              "url_options": {
+                "data": "",
+                "method": "GET",
+                "params": [
+                  {
+                    "key": "from",
+                    "value": "${__from:date}"
+                  },
+                  {
+                    "key": "to",
+                    "value": "${__to:date}"
+                  },
+                  {
+                    "key": "interval",
+                    "value": "$__interval"
+                  },
+                  {
+                    "key": "customInterval",
+                    "value": "$__customInterval(30m,1m,6h,10m,2d,1h,24h)"
+                  }
+                ]
+              }
+            }
+          ],
+          "title": "Debug",
+          "type": "table"
         }
       ],
       "title": "Others",
@@ -771,7 +990,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -787,6 +1006,6 @@
   "timezone": "",
   "title": "Zora / Overview",
   "uid": "8dhbi2L4z",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
