@@ -15,30 +15,24 @@
 apiVersion: zora.undistro.io/v1alpha1
 kind: Plugin
 metadata:
-  name: marvin
+  name: trivy
   labels:
     {{- include "zora.labels" . | nindent 4 }}
 spec:
-  type: misconfiguration
-  image: "{{ .Values.scan.plugins.marvin.image.repository }}:{{ .Values.scan.plugins.marvin.image.tag }}"
-  {{- if .Values.scan.plugins.marvin.resources }}
+  type: vulnerability
+  image: "{{ .Values.scan.plugins.trivy.image.repository }}:{{ .Values.scan.plugins.trivy.image.tag }}"
+  {{- if .Values.scan.plugins.trivy.resources }}
   resources:
-    {{- toYaml .Values.scan.plugins.marvin.resources | nindent 4 }}
+    {{- toYaml .Values.scan.plugins.trivy.resources | nindent 4 }}
   {{- end }}
-  mountCustomChecksVolume: true
+  mountCustomChecksVolume: false
   securityContext:
-    runAsNonRoot: true
-    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
   command:
     - /bin/sh
     - -c
     - |
-      start=$(date +%s)
-      mkdir -p $(CUSTOM_CHECKS_PATH)
-      ls -lh $(CUSTOM_CHECKS_PATH)
-      echo Scanning...
-      /marvin scan --disable-annotation-skip -f $(CUSTOM_CHECKS_PATH) -o json -v 2 > $(DONE_DIR)/results.json
+      time trivy k8s --debug --no-progress -A --scanners=vuln --report=summary -f=json cluster -o $(DONE_DIR)/results.json
       exitcode=$(echo $?)
       if [ $exitcode -ne 0 ]; then
         echo "ERROR" > $(DONE_DIR)/error
@@ -46,6 +40,4 @@ spec:
         echo $(DONE_DIR)/results.json > $(DONE_DIR)/done
       fi
       ls -lh $(DONE_DIR)/
-      end=$(date +%s)
-      echo "Scan has finished in $(($end-$start)) seconds with exit code $exitcode"
       exit $exitcode
