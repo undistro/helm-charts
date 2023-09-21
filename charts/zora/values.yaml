@@ -25,14 +25,22 @@ saas:
   workspaceID: ""
   # -- SaaS server URL
   server: "https://zora-dashboard.undistro.io"
-  hooks:
+  # -- SaaS URL template to notify installation
+  installURL: "{{.Values.saas.server}}/zora/api/v1alpha1/workspaces/{{.Values.saas.workspaceID}}/helmreleases"
+
+hooks:
+  install:
     image:
-      # -- SaaS hooks image repository
+      # -- Install hook image repository
       repository: curlimages/curl
-      # -- SaaS hooks image tag
+      # -- Install hook image tag
       tag: '8.2.1'
-    # -- SaaS install hook URL template
-    installURL: "{{.Values.saas.server}}/zora/api/v1alpha1/workspaces/{{.Values.saas.workspaceID}}/helmreleases"
+  delete:
+    image:
+      # -- Delete hook image repository
+      repository: rancher/kubectl
+      # -- Delete hook image tag
+      tag: 'v1.28.2'
 
 # Credentials for private registries.
 imageCredentials:
@@ -189,7 +197,7 @@ scan:
         # -- trivy plugin image repository
         repository: ghcr.io/aquasecurity/trivy
         # -- trivy plugin image tag
-        tag: 0.44.1
+        tag: 0.45.1
     popeye:
       # -- Specifies whether the following resources should be skipped by `popeye` scans.
       # 1. resources from `kube-system`, `kube-public` and `kube-node-lease` namespaces;
