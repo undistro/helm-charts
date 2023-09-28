@@ -37,6 +37,8 @@ spec:
             - --log-encoding={{ .Values.log.encoding }}
             - --storage={{ .Values.storage }}
             - --database={{ .Values.mongo.database }}
+            - --read-timeout={{ .Values.readTimeout }}
+            - --write-timeout={{ .Values.writeTimeout }}
             {{- if .Values.scheduleValidation }}
             - --schedule-validation
             {{- end }}

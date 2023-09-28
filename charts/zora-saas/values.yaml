@@ -144,6 +144,10 @@ mongo:
 
 scheduleValidation: false
 
+readTimeout: "15s"
+
+writeTimeout: "30s"
+
 monitor:
   enabled: false
   path: /metrics

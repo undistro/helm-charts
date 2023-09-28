@@ -1,6 +1,6 @@
 ui:
   image:
-    tag: saas-0.7.0
+    tag: saas-0.7.5
   resources:
     limits:
       cpu: 100m
@@ -17,6 +17,7 @@ ui:
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production-http01
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
   enabled: true
   className: nginx
   host: zora-dashboard.undistro.io
@@ -35,6 +36,8 @@ mongo:
   database: "zora-saas-prod"
 log:
   level: info
+readTimeout: "30s"
+writeTimeout: "60s"
 proxy:
   enabled: false
 monitor:
