@@ -39,7 +39,6 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: charts
-          charts_repo_url: charts.undistro.io
 
       - name: List packages
         id: ls
