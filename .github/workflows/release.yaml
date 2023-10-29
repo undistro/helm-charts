@@ -57,5 +57,5 @@ jobs:
         run: |
           for f in *tgz
           do
-            helm push $f oci://${{ env.REGISTRY }}/${{ github.repository }}/charts
+            helm push $f oci://${{ env.REGISTRY }}/${{ github.repository }}
           done
