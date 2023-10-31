@@ -1,19 +1,19 @@
 # Zora Helm Chart
 
-![Version: 0.7.0-rc7](https://img.shields.io/badge/Version-0.7.0--rc7-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.7.0-rc7](https://img.shields.io/badge/AppVersion-v0.7.0--rc7-informational?style=flat-square&color=3CA9DD)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.7.0](https://img.shields.io/badge/AppVersion-v0.7.0-informational?style=flat-square&color=3CA9DD)
 
 A multi-plugin solution that reports misconfigurations and vulnerabilities by scanning your cluster at scheduled times.
 
 ## Installing the Chart
 
-To install the chart with the release name `zora`:
+To install the chart with the release name `zora` in `zora-system` namespace:
 
 ```console
 helm repo add undistro https://charts.undistro.io --force-update
 helm repo update undistro
 helm upgrade --install zora undistro/zora \
   -n zora-system \
-  --version 0.7.0-rc7 \
+  --version 0.7.0 \
   --create-namespace \
   --wait \
   --set clusterName="$(kubectl config current-context)"
@@ -31,7 +31,7 @@ The [Parameters](#parameters) section lists the available parameters that can be
 >
 > - List all versions available of `undistro/zora` chart using `helm search repo undistro/zora --versions`
 >
-> - List all releases using `helm list`
+> - List all releases in a specific namespace using `helm list -n zora-system`
 >
 > - Get the notes provided by `zora` release using `helm get notes zora -n zora-system`
 
@@ -40,7 +40,7 @@ The [Parameters](#parameters) section lists the available parameters that can be
 To uninstall/delete the `zora` release:
 
 ```console
-$ helm delete zora
+helm uninstall zora -n zora-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -122,14 +122,14 @@ The following table lists the configurable parameters of the Zora chart and thei
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-$ helm install zora \
-  --set server.service.port=8080 undistro/zora
+helm install zora \
+  --set operator.resources.limits.memory=256Mi undistro/zora
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install zora -f values.yaml undistro/zora
+helm install zora -f values.yaml undistro/zora
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
