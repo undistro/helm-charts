@@ -1,0 +1,25 @@
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  enabled: true
+  className: nginx
+  host: saas-dev.undistro.io
+  tlsSecretName: zora-saas-cert
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 2m
+    memory: 15Mi
+imagePullSecrets:
+  - name: zora-saas-registry-cred
+storage: "mongo"
+mongo:
+  database: "zora-saas-dev"
+log:
+  level: debug
+proxy:
+  enabled: false
+grafanaDashboard:
+  enabled: false
