@@ -4,10 +4,10 @@ ui:
   resources:
     limits:
       #cpu: 100m
-      memory: 256Mi
+      memory: 384Mi
     requests:
       cpu: 50m
-      memory: 100Mi
+      memory: 200Mi
   autoscaling:
     enabled: true
     minReplicas: 2
@@ -28,14 +28,14 @@ resources:
     memory: 512Mi
   requests:
     cpu: 50m
-    memory: 100Mi
+    memory: 200Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
 storage: "mongo"
 mongo:
   database: "zora-saas-prod"
 log:
-  level: info
+  level: debug
 readTimeout: "30s"
 writeTimeout: "60s"
 proxy:
