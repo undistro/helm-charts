@@ -59,6 +59,13 @@ spec:
           securityContext:
             {{- toYaml .Values.operator.rbacProxy.securityContext | nindent 12 }}
         - name: manager
+          {{- if .Values.httpsProxy }}
+          env:
+            - name: HTTPS_PROXY
+              value: {{ .Values.httpsProxy | quote }}
+            - name: NO_PROXY
+              value: {{ .Values.noProxy | quote }}
+          {{- end }}
           command:
             - /manager
           args:
@@ -74,6 +81,9 @@ spec:
             - --worker-image={{ printf "%s:%s" .Values.scan.worker.image.repository (.Values.scan.worker.image.tag | default .Chart.AppVersion) }}
             - --cronjob-clusterrolebinding-name=zora-plugins-rolebinding
             - --cronjob-serviceaccount-name=zora-plugins
+{{- if .Values.scan.plugins.annotations}}
+            - --cronjob-serviceaccount-annotations={{ $first := true }}{{- range $key, $value := .Values.scan.plugins.annotations }}{{if not $first}},{{else}}{{$first = false}}{{end}}{{ $key }}={{$value}}{{- end }}
+{{- end }}
             - --saas-workspace-id={{ .Values.saas.workspaceID }}
             - --saas-server={{ .Values.saas.server }}
             - --version={{ .Chart.Version }}
