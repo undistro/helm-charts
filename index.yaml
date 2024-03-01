@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   zora:
   - apiVersion: v2
+    appVersion: v0.8.3
+    created: "2024-03-01T14:20:41.328925088Z"
+    description: A multi-plugin solution that reports misconfigurations and vulnerabilities
+      by scanning your cluster at scheduled times.
+    digest: 8269b254e5393a48b5d7c73108528aa41f953d84591af876e6a8f6fcfca60376
+    icon: https://zora-docs.undistro.io/v0.7/assets/logo.svg
+    name: zora
+    sources:
+    - https://github.com/undistro/zora
+    type: application
+    urls:
+    - https://github.com/undistro/helm-charts/releases/download/zora-0.8.3/zora-0.8.3.tgz
+    version: 0.8.3
+  - apiVersion: v2
     appVersion: v0.8.3-rc1
     created: "2024-02-29T20:31:51.914609121Z"
     description: A multi-plugin solution that reports misconfigurations and vulnerabilities
@@ -1081,4 +1095,4 @@ entries:
     urls:
     - https://github.com/undistro/charts.undistro.io/releases/download/zora-saas-0.1.3/zora-saas-0.1.3.tgz
     version: 0.1.3
-generated: "2024-02-29T20:31:51.914903167Z"
+generated: "2024-03-01T14:20:41.329194509Z"
