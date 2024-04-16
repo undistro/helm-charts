@@ -1,6 +1,6 @@
 # Zora Helm Chart
 
-![Version: 0.8.4-rc4](https://img.shields.io/badge/Version-0.8.4--rc4-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.8.4-rc4](https://img.shields.io/badge/AppVersion-v0.8.4--rc4-informational?style=flat-square&color=3CA9DD)
+![Version: 0.8.4-rc5](https://img.shields.io/badge/Version-0.8.4--rc5-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.8.4-rc5](https://img.shields.io/badge/AppVersion-v0.8.4--rc5-informational?style=flat-square&color=3CA9DD)
 
 A multi-plugin solution that reports misconfigurations and vulnerabilities by scanning your cluster at scheduled times.
 
@@ -13,7 +13,7 @@ helm repo add undistro https://charts.undistro.io --force-update
 helm repo update undistro
 helm upgrade --install zora undistro/zora \
   -n zora-system \
-  --version 0.8.4-rc4 \
+  --version 0.8.4-rc5 \
   --create-namespace \
   --wait \
   --set clusterName="$(kubectl config current-context)"
@@ -57,10 +57,10 @@ The following table lists the configurable parameters of the Zora chart and thei
 | saas.workspaceID | string | `""` | Your SaaS workspace ID |
 | saas.server | string | `"https://zora-dashboard.undistro.io"` | SaaS server URL |
 | saas.installURL | string | `"{{.Values.saas.server}}/zora/api/v1alpha1/workspaces/{{.Values.saas.workspaceID}}/helmreleases"` | SaaS URL template to notify installation |
-| hooks.install.image.repository | string | `"curlimages/curl"` | Install hook image repository |
-| hooks.install.image.tag | string | `"8.2.1"` | Install hook image tag |
-| hooks.delete.image.repository | string | `"rancher/kubectl"` | Delete hook image repository |
-| hooks.delete.image.tag | string | `"v1.28.2"` | Delete hook image tag |
+| hooks.install.image.repository | string | `"curlimages/curl"` | Post-install hook image repository |
+| hooks.install.image.tag | string | `"8.7.1"` | Post-install hook image tag |
+| hooks.delete.image.repository | string | `"rancher/kubectl"` | Pre-delete hook image repository |
+| hooks.delete.image.tag | string | `"v1.29.2"` | Pre-delete hook image tag |
 | imageCredentials.create | bool | `false` | Specifies whether the secret should be created by providing credentials |
 | imageCredentials.registry | string | `"ghcr.io"` | Docker registry host |
 | imageCredentials.username | string | `""` | Docker registry username |
@@ -121,8 +121,8 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.trivy.timeout | string | `"10m"` | Trivy timeout |
 | scan.plugins.trivy.insecure | bool | `false` | Allow insecure server connections for Trivy |
 | scan.plugins.trivy.persistence.enabled | bool | `true` | Specifies whether Trivy vulnerabilities database should be persisted between the scans, using PersistentVolumeClaim |
-| scan.plugins.trivy.persistence.accessMode | string | `"ReadWriteOnce"` | Persistence access mode |
-| scan.plugins.trivy.persistence.storageClass | string | `""` | Persistence storage class. Let it empty for default storage class |
+| scan.plugins.trivy.persistence.accessMode | string | `"ReadWriteOnce"` | [Persistence access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
+| scan.plugins.trivy.persistence.storageClass | string | `""` | [Persistence storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/). Set to empty for default storage class |
 | scan.plugins.trivy.persistence.storageRequest | string | `"1Gi"` | Persistence storage size |
 | scan.plugins.trivy.persistence.downloadJavaDB | bool | `false` | Specifies whether Java vulnerability database should be downloaded on helm install/upgrade |
 | scan.plugins.popeye.skipInternalResources | bool | `false` | Specifies whether the following resources should be skipped by `popeye` scans. 1. resources from `kube-system`, `kube-public` and `kube-node-lease` namespaces; 2. kubernetes system reserved RBAC (prefixed with `system:`); 3. `kube-root-ca.crt` configmaps; 4. `default` namespace; 5. `default` serviceaccounts; 6. Helm secrets (prefixed with `sh.helm.release`); 7. Zora components. See `popeye` configuration file that is used for this case: https://github.com/undistro/zora/blob/main/charts/zora/templates/plugins/popeye-config.yaml |
@@ -133,10 +133,11 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.popeye.env | list | `[]` | List of environment variables to set in popeye container. |
 | scan.plugins.popeye.envFrom | list | `[]` | List of sources to populate environment variables in popeye container. |
 | kubexnsImage.repository | string | `"ghcr.io/undistro/kubexns"` | kubexns image repository |
-| kubexnsImage.tag | string | `"v0.1.2"` | kubexns image tag |
+| kubexnsImage.tag | string | `"v0.1.3"` | kubexns image tag |
 | customChecksConfigMap | string | `"zora-custom-checks"` | Custom checks ConfigMap name |
 | httpsProxy | string | `""` | HTTPS proxy URL |
 | noProxy | string | `"kubernetes.default.svc.*,127.0.0.1,localhost"` | Comma-separated list of URL patterns to be excluded from going through the proxy |
+| updateCRDs | bool | `true` for upgrades | Specifies whether CRDs should be updated by operator at startup |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 

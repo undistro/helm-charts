@@ -31,16 +31,16 @@ saas:
 hooks:
   install:
     image:
-      # -- Install hook image repository
+      # -- Post-install hook image repository
       repository: curlimages/curl
-      # -- Install hook image tag
-      tag: '8.2.1'
+      # -- Post-install hook image tag
+      tag: '8.7.1'
   delete:
     image:
-      # -- Delete hook image repository
+      # -- Pre-delete hook image repository
       repository: rancher/kubectl
-      # -- Delete hook image tag
-      tag: 'v1.28.2'
+      # -- Pre-delete hook image tag
+      tag: 'v1.29.2'
 
 # Credentials for private registries.
 imageCredentials:
@@ -232,9 +232,9 @@ scan:
       persistence:
         # -- Specifies whether Trivy vulnerabilities database should be persisted between the scans, using PersistentVolumeClaim
         enabled: true
-        # -- Persistence access mode
+        # -- [Persistence access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
         accessMode: ReadWriteOnce
-        # -- Persistence storage class. Let it empty for default storage class
+        # -- [Persistence storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/). Set to empty for default storage class
         storageClass: ""
         # -- Persistence storage size
         storageRequest: 1Gi
@@ -276,7 +276,7 @@ kubexnsImage:
   # -- kubexns image repository
   repository: ghcr.io/undistro/kubexns
   # -- kubexns image tag
-  tag: v0.1.2
+  tag: v0.1.3
 
 # -- Custom checks ConfigMap name
 customChecksConfigMap: zora-custom-checks
@@ -285,3 +285,7 @@ customChecksConfigMap: zora-custom-checks
 httpsProxy: ""
 # -- Comma-separated list of URL patterns to be excluded from going through the proxy
 noProxy: kubernetes.default.svc.*,127.0.0.1,localhost
+
+# -- (bool) Specifies whether CRDs should be updated by operator at startup
+# @default -- `true` for upgrades
+updateCRDs:
