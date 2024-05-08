@@ -1,6 +1,6 @@
 # Zora Helm Chart
 
-![Version: 0.8.5-rc2](https://img.shields.io/badge/Version-0.8.5--rc2-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.8.5-rc2](https://img.shields.io/badge/AppVersion-v0.8.5--rc2-informational?style=flat-square&color=3CA9DD)
+![Version: 0.8.5-rc3](https://img.shields.io/badge/Version-0.8.5--rc3-informational?style=flat-square&color=3CA9DD) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square&color=3CA9DD) ![AppVersion: v0.8.5-rc3](https://img.shields.io/badge/AppVersion-v0.8.5--rc3-informational?style=flat-square&color=3CA9DD)
 
 A multi-plugin solution that reports misconfigurations and vulnerabilities by scanning your cluster at scheduled times.
 
@@ -13,7 +13,7 @@ helm repo add undistro https://charts.undistro.io --force-update
 helm repo update undistro
 helm upgrade --install zora undistro/zora \
   -n zora-system \
-  --version 0.8.5-rc2 \
+  --version 0.8.5-rc3 \
   --create-namespace \
   --wait \
   --set clusterName="$(kubectl config current-context)"
@@ -93,6 +93,7 @@ The following table lists the configurable parameters of the Zora chart and thei
 | operator.log.level | string | `"info"` | Log level to configure the verbosity of logging. Can be one of 'debug', 'info', 'error', or any integer value > 0 which corresponds to custom debug levels of increasing verbosity |
 | operator.log.stacktraceLevel | string | `"error"` | Log level at and above which stacktraces are captured (one of 'info', 'error' or 'panic') |
 | operator.log.timeEncoding | string | `"rfc3339"` | Log time encoding (one of 'epoch', 'millis', 'nano', 'iso8601', 'rfc3339' or 'rfc3339nano') |
+| operator.webhook.enabled | bool | `true` | Specifies whether webhook server is enabled |
 | scan.misconfiguration.enabled | bool | `true` | Specifies whether misconfiguration scan is enabled |
 | scan.misconfiguration.schedule | string | Cron expression for every hour at the current minute + 5 minutes | Cluster scan schedule in Cron format for misconfiguration scan |
 | scan.misconfiguration.successfulScansHistoryLimit | int | `1` | The number of successful finished scans and their issues to retain. |
@@ -108,6 +109,7 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.marvin.podAnnotations | object | `{}` | Annotations added to the marvin pods |
 | scan.plugins.marvin.image.repository | string | `"ghcr.io/undistro/marvin"` | marvin plugin image repository |
 | scan.plugins.marvin.image.tag | string | `"v0.2.3"` | marvin plugin image tag |
+| scan.plugins.marvin.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | scan.plugins.marvin.env | list | `[]` | List of environment variables to set in marvin container. |
 | scan.plugins.marvin.envFrom | list | `[]` | List of sources to populate environment variables in marvin container. |
 | scan.plugins.trivy.ignoreUnfixed | bool | `false` | Specifies whether only fixed vulnerabilities should be reported |
@@ -115,7 +117,8 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.trivy.resources | object | `{}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `trivy` container |
 | scan.plugins.trivy.podAnnotations | object | `{}` | Annotations added to the trivy pods |
 | scan.plugins.trivy.image.repository | string | `"ghcr.io/undistro/trivy"` | trivy plugin image repository |
-| scan.plugins.trivy.image.tag | string | `"0.50.1-1"` | trivy plugin image tag |
+| scan.plugins.trivy.image.tag | float | `0.51` | trivy plugin image tag |
+| scan.plugins.trivy.image.pullPolicy | string | `"Always"` | Image pull policy |
 | scan.plugins.trivy.env | list | `[]` | List of environment variables to set in trivy container. |
 | scan.plugins.trivy.envFrom | list | `[]` | List of sources to populate environment variables in trivy container. |
 | scan.plugins.trivy.timeout | string | `"10m"` | Trivy timeout |
@@ -129,11 +132,12 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.popeye.resources | object | `{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"250m","memory":"256Mi"}}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `popeye` container |
 | scan.plugins.popeye.podAnnotations | object | `{}` | Annotations added to the popeye pods |
 | scan.plugins.popeye.image.repository | string | `"ghcr.io/undistro/popeye"` | popeye plugin image repository |
-| scan.plugins.popeye.image.tag | string | `"0.21.3-6"` | popeye plugin image tag |
+| scan.plugins.popeye.image.tag | float | `0.21` | popeye plugin image tag |
+| scan.plugins.popeye.image.pullPolicy | string | `"Always"` | Image pull policy |
 | scan.plugins.popeye.env | list | `[]` | List of environment variables to set in popeye container. |
 | scan.plugins.popeye.envFrom | list | `[]` | List of sources to populate environment variables in popeye container. |
 | kubexnsImage.repository | string | `"ghcr.io/undistro/kubexns"` | kubexns image repository |
-| kubexnsImage.tag | string | `"v0.1.3"` | kubexns image tag |
+| kubexnsImage.tag | string | `"v0.1.4"` | kubexns image tag |
 | customChecksConfigMap | string | `"zora-custom-checks"` | Custom checks ConfigMap name |
 | httpsProxy | string | `""` | HTTPS proxy URL |
 | noProxy | string | `"kubernetes.default.svc.*,127.0.0.1,localhost"` | Comma-separated list of URL patterns to be excluded from going through the proxy |
