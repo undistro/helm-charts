@@ -33,12 +33,11 @@ spec:
             {{- toYaml .Values.admin.securityContext | nindent 12 }}
           image: "{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag | default .Chart.AppVersion }}"
           args:
-            - --storage={{ .Values.storage }}
             - --database={{ .Values.mongo.database }}
           envFrom:
             - secretRef:
                 name: {{ .Values.mongo.secret }}
-                optional: {{ if eq .Values.storage "mongo" }}false{{ else }}true{{ end }}
+                optional: false
           imagePullPolicy: {{ .Values.admin.image.pullPolicy }}
           ports:
             - name: http

@@ -1,7 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "zora-saas.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-{{- $uiPort := .Values.ui.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -37,20 +35,22 @@ spec:
     - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
-          - path: {{ .Values.ingress.server.path }}
-            {{- if and .Values.ingress.server.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .Values.ingress.server.pathType }}
+          {{ range $path := .Values.ingress.server.paths }}
+          - path: {{ $path }}
+            {{- if and $.Values.ingress.server.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ $.Values.ingress.server.pathType }}
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ $.Values.service.port }}
               {{- else }}
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              servicePort: {{ $.Values.service.port }}
               {{- end }}
+          {{- end }}
           {{- if .Values.ui.enabled }}
           - path: {{ .Values.ingress.ui.path }}
             {{- if and .Values.ingress.ui.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
@@ -61,10 +61,10 @@ spec:
               service:
                 name: {{ $fullName }}-ui
                 port:
-                  number: {{ $uiPort }}
+                  number: {{ $.Values.ui.service.port }}
               {{- else }}
               serviceName: {{ $fullName }}-ui
-              servicePort: {{ $uiPort }}
+              servicePort: {{ $.Values.ui.service.port }}
               {{- end }}
           {{- end }}
 {{- end }}

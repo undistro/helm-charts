@@ -1,6 +1,6 @@
 1. Get the application URL by running these commands:
 {{- if .Values.ingress.enabled }}
-  http{{ if .Values.ingress.tlsSecretName }}s{{ end }}://{{ .Values.ingress.host }}{{ if .Values.ui.enabled }}{{ .Values.ingress.ui.path }}{{ else }}{{ .Values.ingress.server.path }}{{ end }}
+  http{{ if .Values.ingress.tlsSecretName }}s{{ end }}://{{ .Values.ingress.host }}{{ if .Values.ui.enabled }}{{ .Values.ingress.ui.path }}{{ else }}{{ first .Values.ingress.server.paths }}{{ end }}
 {{- else if contains "NodePort" .Values.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "zora-saas.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")

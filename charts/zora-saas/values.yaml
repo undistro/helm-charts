@@ -67,7 +67,9 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   host: zora-saas.domain
   server:
-    path: /zora/api/v1alpha1
+    paths:
+     - /zora/api/v1alpha1
+     - /zora/api/v1alpha2
     pathType: ImplementationSpecific
   ui:
     path: /
@@ -133,9 +135,6 @@ ui:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-
-# 'mongo' or 'in_memory'
-storage: "in_memory"
 
 mongo:
   # This secret must contains MONGODB_URI data

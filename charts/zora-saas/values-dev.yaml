@@ -14,7 +14,6 @@ resources:
     memory: 15Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
-storage: "mongo"
 mongo:
   database: "zora-saas-dev"
 log:
