@@ -20,3 +20,4 @@ log:
   level: info
 proxy:
   enabled: false
+blockNewUsers: true

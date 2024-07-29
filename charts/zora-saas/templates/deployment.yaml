@@ -41,6 +41,7 @@ spec:
             {{- if .Values.scheduleValidation }}
             - --schedule-validation
             {{- end }}
+            - --block-new-users={{ .Values.blockNewUsers }}
           envFrom:
             - secretRef:
                 name: {{ .Values.mongo.secret }}

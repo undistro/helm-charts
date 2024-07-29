@@ -47,3 +47,4 @@ autoscaling:
   maxReplicas: 20
   targetCPUUtilizationPercentage: 60
   targetMemoryUtilizationPercentage: 60
+blockNewUsers: true

@@ -143,6 +143,8 @@ mongo:
 
 scheduleValidation: false
 
+blockNewUsers: false
+
 readTimeout: "15s"
 
 writeTimeout: "30s"

@@ -22,3 +22,4 @@ proxy:
   enabled: false
 grafanaDashboard:
   enabled: false
+blockNewUsers: true
