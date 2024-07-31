@@ -108,8 +108,8 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.marvin.resources | object | `{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"250m","memory":"256Mi"}}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `marvin` container |
 | scan.plugins.marvin.podAnnotations | object | `{}` | Annotations added to the marvin pods |
 | scan.plugins.marvin.image.repository | string | `"ghcr.io/undistro/marvin"` | marvin plugin image repository |
-| scan.plugins.marvin.image.tag | string | `"v0.2.3"` | marvin plugin image tag |
-| scan.plugins.marvin.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| scan.plugins.marvin.image.tag | string | `"v0.2"` | marvin plugin image tag |
+| scan.plugins.marvin.image.pullPolicy | string | `"Always"` | Image pull policy |
 | scan.plugins.marvin.env | list | `[]` | List of environment variables to set in marvin container. |
 | scan.plugins.marvin.envFrom | list | `[]` | List of sources to populate environment variables in marvin container. |
 | scan.plugins.trivy.ignoreUnfixed | bool | `false` | Specifies whether only fixed vulnerabilities should be reported |
@@ -117,7 +117,7 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.trivy.resources | object | `{}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `trivy` container |
 | scan.plugins.trivy.podAnnotations | object | `{}` | Annotations added to the trivy pods |
 | scan.plugins.trivy.image.repository | string | `"ghcr.io/undistro/trivy"` | trivy plugin image repository |
-| scan.plugins.trivy.image.tag | float | `0.51` | trivy plugin image tag |
+| scan.plugins.trivy.image.tag | float | `0.53` | trivy plugin image tag |
 | scan.plugins.trivy.image.pullPolicy | string | `"Always"` | Image pull policy |
 | scan.plugins.trivy.env | list | `[]` | List of environment variables to set in trivy container. |
 | scan.plugins.trivy.envFrom | list | `[]` | List of sources to populate environment variables in trivy container. |
@@ -127,7 +127,7 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.trivy.persistence.fsGroup | int | `0` | Specifies the fsGroup to use when mounting the persistent volume |
 | scan.plugins.trivy.persistence.accessMode | string | `"ReadWriteOnce"` | [Persistence access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
 | scan.plugins.trivy.persistence.storageClass | string | `""` | [Persistence storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/). Set to empty for default storage class |
-| scan.plugins.trivy.persistence.storageRequest | string | `"1Gi"` | Persistence storage size |
+| scan.plugins.trivy.persistence.storageRequest | string | `"2Gi"` | Persistence storage size |
 | scan.plugins.trivy.persistence.downloadJavaDB | bool | `false` | Specifies whether Java vulnerability database should be downloaded on helm install/upgrade |
 | scan.plugins.popeye.skipInternalResources | bool | `false` | Specifies whether the following resources should be skipped by `popeye` scans. 1. resources from `kube-system`, `kube-public` and `kube-node-lease` namespaces; 2. kubernetes system reserved RBAC (prefixed with `system:`); 3. `kube-root-ca.crt` configmaps; 4. `default` namespace; 5. `default` serviceaccounts; 6. Helm secrets (prefixed with `sh.helm.release`); 7. Zora components. See `popeye` configuration file that is used for this case: https://github.com/undistro/zora/blob/main/charts/zora/templates/plugins/popeye-config.yaml |
 | scan.plugins.popeye.resources | object | `{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"250m","memory":"256Mi"}}` | [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to `popeye` container |
@@ -138,7 +138,8 @@ The following table lists the configurable parameters of the Zora chart and thei
 | scan.plugins.popeye.env | list | `[]` | List of environment variables to set in popeye container. |
 | scan.plugins.popeye.envFrom | list | `[]` | List of sources to populate environment variables in popeye container. |
 | kubexnsImage.repository | string | `"ghcr.io/undistro/kubexns"` | kubexns image repository |
-| kubexnsImage.tag | string | `"v0.1.4"` | kubexns image tag |
+| kubexnsImage.tag | string | `"v0.1"` | kubexns image tag |
+| kubexnsImage.pullPolicy | string | `"Always"` | Image pull policy |
 | customChecksConfigMap | string | `"zora-custom-checks"` | Custom checks ConfigMap name |
 | httpsProxy | string | `""` | HTTPS proxy URL |
 | noProxy | string | `"kubernetes.default.svc.*,127.0.0.1,localhost"` | Comma-separated list of URL patterns to be excluded from going through the proxy |
