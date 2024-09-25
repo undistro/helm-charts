@@ -14,8 +14,6 @@ resources:
     memory: 15Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
-mongo:
-  database: "zora-saas-hml"
 log:
   level: info
 proxy:

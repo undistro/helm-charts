@@ -31,8 +31,6 @@ resources:
     memory: 200Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
-mongo:
-  database: "zora-saas-prod"
 log:
   level: debug
 readTimeout: "30s"

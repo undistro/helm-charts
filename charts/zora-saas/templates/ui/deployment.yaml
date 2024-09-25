@@ -41,8 +41,6 @@ spec:
                 optional: false
                 name: {{ .Values.ui.secretName }}
           env:
-            - name: NEXTAUTH_URL_INTERNAL
-              value: http://127.0.0.1:4200
             - name: SAAS_URL
             {{- if .Values.proxy.enabled }}
               value: "https://saas-proxy.{{ .Release.Namespace }}.svc:{{ .Values.proxy.port }}/zora"

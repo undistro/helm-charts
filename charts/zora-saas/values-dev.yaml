@@ -14,12 +14,10 @@ resources:
     memory: 15Mi
 imagePullSecrets:
   - name: zora-saas-registry-cred
-mongo:
-  database: "zora-saas-dev"
 log:
   level: debug
 proxy:
   enabled: false
 grafanaDashboard:
   enabled: false
-blockNewUsers: true
+blockNewUsers: false

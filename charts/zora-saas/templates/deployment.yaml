@@ -35,7 +35,6 @@ spec:
           args:
             - --log-level={{ .Values.log.level }}
             - --log-encoding={{ .Values.log.encoding }}
-            - --database={{ .Values.mongo.database }}
             - --read-timeout={{ .Values.readTimeout }}
             - --write-timeout={{ .Values.writeTimeout }}
             {{- if .Values.scheduleValidation }}
@@ -44,8 +43,11 @@ spec:
             - --block-new-users={{ .Values.blockNewUsers }}
           envFrom:
             - secretRef:
-                name: {{ .Values.mongo.secret }}
+                name: {{ .Values.database.secret }}
                 optional: false
+            - secretRef:
+                optional: false
+                name: {{ .Values.secretName }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

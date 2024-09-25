@@ -5,6 +5,11 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+# This secret must contains
+# - OAUTH_DOMAIN - The hostname for the login server
+# - OAUTH_AUDIENCE - The audience used by the SaaS API
+# - OAUTH_CLIENT_ID - The Operator authentication client ID
+secretName: "zora-saas-credentials"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -108,10 +113,13 @@ ui:
     repository: ghcr.io/undistro/zora-ui-saas
     pullPolicy: IfNotPresent
     tag: ""
-  # This secret must contains GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
-  #   GITHUB_ID, GITHUB_SECRET,
-  #   AZURE_AD_CLIENT_ID, AZURE_AD_CLIENT_SECRET, AZURE_AD_TENANT_ID
-  #   and NEXTAUTH_SECRET
+  # This secret must contains
+  # - AUTH0_SECRET - used to encrypt the cookies sent to the clients
+  # - AUTH0_BASE_URL - The base url for the application, this will be used for setting up the login callback (e.g. https://localhost:3000)
+  # - AUTH0_ISSUER_BASE_URL - The base url for the login oauth server (https://<auth server>)
+  # - AUTH0_CLIENT_ID - The UI authentication client ID
+  # - AUTH0_CLIENT_SECRET - The UI authentication secret
+  # - AUTH0_AUDIENCE - The audience used by the SaaS API
   secretName: "zora-saas-ui-credentials"
   podAnnotations: {}
   podSecurityContext:
@@ -136,10 +144,8 @@ ui:
   tolerations: []
   affinity: {}
 
-mongo:
-  # This secret must contains MONGODB_URI data
-  secret: mongodb-connection
-  database: "test"
+database:
+  secret: postgres-credentials
 
 scheduleValidation: false
 
@@ -166,6 +172,10 @@ admin:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  # This secret must contains
+  # - OAUTH_DOMAIN - The hostname for the login server
+  # - OAUTH_AUDIENCE - The audience used by the Monitoring API
+  secretName: "zora-admin-credentials"
   podAnnotations: {}
   podSecurityContext:
     fsGroup: 2000
