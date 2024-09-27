@@ -18,6 +18,9 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production-http01
     nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
+    nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/proxy-buffers: 8 32k
   enabled: true
   className: nginx
   host: zora-dashboard.undistro.io
@@ -45,4 +48,4 @@ autoscaling:
   maxReplicas: 20
   targetCPUUtilizationPercentage: 60
   targetMemoryUtilizationPercentage: 60
-blockNewUsers: true
+blockNewUsers: false

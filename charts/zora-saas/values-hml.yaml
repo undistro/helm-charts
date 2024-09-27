@@ -1,6 +1,9 @@
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
+    nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/proxy-buffers: 8 32k
   enabled: true
   className: nginx
   host: saas-hml.undistro.io
@@ -18,4 +21,4 @@ log:
   level: info
 proxy:
   enabled: false
-blockNewUsers: true
+blockNewUsers: false
