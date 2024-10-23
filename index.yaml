@@ -1012,6 +1012,16 @@ entries:
     version: 0.3.9
   zora-saas:
   - apiVersion: v2
+    appVersion: v0.4.6
+    created: "2024-10-23T18:48:21.701734536Z"
+    description: A Helm chart to deploy Zora SaaS on Kubernetes
+    digest: 88ede62fc464c328158bfc767e02356ed15f72789fa1f27b03489f5e67d1c2ff
+    name: zora-saas
+    type: application
+    urls:
+    - https://github.com/undistro/helm-charts/releases/download/zora-saas-0.4.6/zora-saas-0.4.6.tgz
+    version: 0.4.6
+  - apiVersion: v2
     appVersion: v0.4.5
     created: "2024-10-10T19:44:37.961184776Z"
     description: A Helm chart to deploy Zora SaaS on Kubernetes
@@ -1501,4 +1511,4 @@ entries:
     urls:
     - https://github.com/undistro/charts.undistro.io/releases/download/zora-saas-0.1.3/zora-saas-0.1.3.tgz
     version: 0.1.3
-generated: "2024-10-10T19:44:37.961741716Z"
+generated: "2024-10-23T18:48:21.702053414Z"
