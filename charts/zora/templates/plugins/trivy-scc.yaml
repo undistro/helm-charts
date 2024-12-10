@@ -12,18 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- if and .Values.scan.plugins.trivy.persistence.enabled .Values.scan.vulnerability.enabled }}
-apiVersion: v1
-kind: PersistentVolumeClaim
+{{- if .Capabilities.APIVersions.Has "security.openshift.io/v1" }}
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
 metadata:
-  name: trivy-dbs-volume
-spec:
-  {{- if .Values.scan.plugins.trivy.persistence.storageClass }}
-  storageClassName: {{ .Values.scan.plugins.trivy.persistence.storageClass | quote }}
-  {{- end }}
-  accessModes:
-    - {{ .Values.scan.plugins.trivy.persistence.accessMode }}
-  resources:
-    requests:
-      storage: {{ .Values.scan.plugins.trivy.persistence.storageRequest | quote }}
+  name: zora-scc
+fsGroup:
+  type: MustRunAs
+  ranges:
+  - min: {{ .Values.scan.plugins.trivy.fsGroup }}
+    max: {{ .Values.scan.plugins.trivy.fsGroup }}
+runAsUser:
+  type: MustRunAsNonRoot
+seLinuxContext:
+  type: RunAsAny
+seccompProfiles:
+- runtime/default
+volumes:
+- configMap
+- csi
+- downwardAPI
+- emptyDir
+- ephemeral
+- persistentVolumeClaim
+- projected
+- secret
+users:
+- system:serviceaccount:{{ .Release.Namespace }}:zora-plugins
 {{- end }}
