@@ -63,22 +63,6 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.proxy.enabled }}
-        - name: saas-proxy
-          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
-          imagePullPolicy: {{ .Values.proxy.image.pullPolicy }}
-          args:
-            - "--secure-listen-address=0.0.0.0:{{ .Values.proxy.port }}"
-            - "--upstream=http://127.0.0.1:3003"
-            - "--logtostderr={{ .Values.proxy.log.toStderr }}"
-            - "--v={{ .Values.proxy.log.level }}"
-          ports:
-            - containerPort: {{ .Values.proxy.port }}
-              name: https
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 65532
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -21,8 +21,6 @@ log:
   level: debug
 readTimeout: "30s"
 writeTimeout: "60s"
-proxy:
-  enabled: false
 grafanaDashboard:
   enabled: false
 blockNewUsers: false

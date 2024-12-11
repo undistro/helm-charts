@@ -38,8 +38,6 @@ log:
   level: debug
 readTimeout: "30s"
 writeTimeout: "60s"
-proxy:
-  enabled: false
 monitor:
   enabled: true
 autoscaling:

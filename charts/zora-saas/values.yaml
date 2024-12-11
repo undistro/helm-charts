@@ -42,28 +42,6 @@ service:
   type: ClusterIP
   port: 80
 
-proxy:
-  enabled: true
-  image:
-    repository: quay.io/brancz/kube-rbac-proxy
-    pullPolicy: IfNotPresent
-    tag: v0.13.1
-  type: ClusterIP
-  port: 8443
-  log:
-    level: 10
-    toStderr: true
-  endpoints:
-    - "/zora/api/v1/me"
-    - "/zora/api/v1/users"
-    - "/zora/api/v1/helmreleases"
-    - "/zora/api/v1/clusters"
-    - "/zora/api/v1/namespaces/*"
-    - "/zora/api/v1/issues"
-    - "/zora/api/v1/workspaces"
-    - "/zora/api/v1/workspaces/*"
-  verbs: ["get", "update"]
-
 ingress:
   enabled: false
   className: ""

@@ -19,6 +19,4 @@ imagePullSecrets:
   - name: zora-saas-registry-cred
 log:
   level: info
-proxy:
-  enabled: false
 blockNewUsers: false

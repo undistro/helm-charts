@@ -25,9 +25,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.proxy.enabled }}
-      serviceAccountName: saas-proxy-client
-      {{- end }}
       securityContext:
         {{- toYaml .Values.ui.podSecurityContext | nindent 8 }}
       containers:
@@ -42,13 +39,7 @@ spec:
                 name: {{ .Values.ui.secretName }}
           env:
             - name: SAAS_URL
-            {{- if .Values.proxy.enabled }}
-              value: "https://saas-proxy.{{ .Release.Namespace }}.svc:{{ .Values.proxy.port }}/zora"
-            - name: SAAS_PROXY_TOKEN_PATH
-              value: "/var/run/secrets/kubernetes.io/serviceaccount/token"
-            {{- else }}
               value: 'http://{{ include "zora-saas.fullname" . }}:{{ .Values.service.port }}/zora'
-            {{- end }}
           ports:
             - name: http
               containerPort: 4200
