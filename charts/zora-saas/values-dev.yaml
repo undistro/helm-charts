@@ -19,6 +19,8 @@ imagePullSecrets:
   - name: zora-saas-registry-cred
 log:
   level: debug
+readTimeout: "30s"
+writeTimeout: "60s"
 proxy:
   enabled: false
 grafanaDashboard:

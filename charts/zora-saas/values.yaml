@@ -153,7 +153,7 @@ blockNewUsers: false
 
 readTimeout: "15s"
 
-writeTimeout: "30s"
+writeTimeout: "60s"
 
 monitor:
   enabled: false
