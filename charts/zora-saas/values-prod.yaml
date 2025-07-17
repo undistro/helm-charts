@@ -1,6 +1,6 @@
 ui:
   image:
-    tag: saas-0.10.8
+    tag: saas-0.10.9
   resources:
     limits:
       #cpu: 100m
@@ -21,6 +21,7 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
     nginx.ingress.kubernetes.io/proxy-buffers: 8 32k
+    nginx.ingress.kubernetes.io/proxy-busy-buffer-size: 32k
   enabled: true
   className: nginx
   host: zora-dashboard.undistro.io
