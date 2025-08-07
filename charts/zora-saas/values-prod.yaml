@@ -48,3 +48,4 @@ autoscaling:
   targetCPUUtilizationPercentage: 60
   targetMemoryUtilizationPercentage: 60
 blockNewUsers: false
+scheduleValidation: true
